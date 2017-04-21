@@ -1,7 +1,4 @@
-# dark-classifier
-
-# TensorFlow Image Classifier
-## how to classify
+# dark-classifier(editing...)
 
 ## how to retrain
 ### docker image requisites
@@ -21,7 +18,10 @@
 avoid issues ('WARNING: Folder has less than 20 images, which may cause issues.')
 
 ### Step 4: retrain model
-[How to Retrain Inception's Final Layer for New Categories](https://www.tensorflow.org/tutorials/image_retraining)
+* [How to Retrain Inception's Final Layer for New Categories](https://www.tensorflow.org/tutorials/image_retraining)
 `python /tensorflow/tensorflow/examples/image_retraining/retrain.py --image_dir /face/aligned-images-jpeg --output_graph /face/output_graph.gb --output_labels /face/output_labels.txt --how_many_training_steps 500 --model_dir /face/inception --bottleneck_dir /face/bottleneck`
 
-and you will get the new classifier (output_graph.gb and output_labels.txt) to able to do DARK Facial Recognition
+and you will get the retrain model (output_graph.gb and output_labels.txt) to able to do DARK Facial Recognition
+
+## how to classify
+[use the retrained model in a Python program](https://github.com/eldor4do/TensorFlow-Examples/blob/master/retraining-example.py)
