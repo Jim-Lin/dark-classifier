@@ -13,6 +13,7 @@ from multiprocessing import Pool
 class ETL:
     root = "/home/shuai/face/"
     root_training = root + "training-images/"
+    root_training_today = root + datetime.date.today().strftime('%Y-%m-%d') + "-training-images/"
     actress_json = root + 'actress.json'
 
     def __init__(self):
@@ -41,7 +42,7 @@ class ETL:
                     actress_img = img.get("src").replace('medium/', '')
                     actress_name = img.get("alt").encode('utf-8')
 
-                    directory = self.root_training + actress_id
+                    directory = self.root_training_today + actress_id
                     if not os.path.exists(directory):
                         os.makedirs(directory)
 
@@ -69,7 +70,7 @@ class ETL:
                 actress_img = actress.find("img").get("src")
                 actress_name = actress.text.encode('utf-8')
 
-                directory = self.root_training + actress_id
+                directory = self.root_training_today + actress_id
                 if not os.path.exists(directory):
                     os.makedirs(directory)
 
@@ -110,7 +111,7 @@ class ETL:
             title_tag  = works.find("td", {"class": "title-monocal"})
             title = title_tag.find("a")
             title_name = title.text
-            pattern = re.compile(ur"(^(【数量限定】|【DMM限定】|【DMM限定販売】|【アウトレット】)|（ブルーレイディスク）$)", re.UNICODE)
+            pattern = re.compile(ur"(^(【数量限定】|【DMM限定】|【DMM限定販売】|【アウトレット】|【特選アウトレット】)|（ブルーレイディスク）$)", re.UNICODE)
             match = re.search(pattern, title_name)
             if match:
                 continue
@@ -134,7 +135,10 @@ class ETL:
         performer = soup.find("span", {"id": "performer"})
         performer_a_tag = performer.find_all("a")
         if len(performer_a_tag) == 1:
-            directory = self.root_training + actress_id
+            directory = self.root_training_today + actress_id
+            if not os.path.exists(directory):
+                os.makedirs(directory)
+
             os.system('wget ' + a_tag.get('href') + ' -nc -P ' + directory)
             print performer_a_tag[0]
             print a_tag.get('href')
