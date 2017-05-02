@@ -19,6 +19,8 @@ def main(args):
     for actress_id in ids:
         dir_from = os.path.join(args[0], actress_id)
         dir_to = os.path.join(args[1], actress_id)
+        if not os.path.exists(dir_to):
+            os.makedirs(dir_to)
 
         files = [f for f in os.listdir(dir_from) if not f.startswith('.')]
         for file in files:
