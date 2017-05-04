@@ -55,19 +55,25 @@ class ETL:
             json.dump(self.dict_actress, f, ensure_ascii=False)
 
     def check_new_actress(self):
-        url = "http://actress.dmm.co.jp/-/top/"
+        self.get_new_actress("http://actress.dmm.co.jp/-/top/", "act-box-125 group", 1, "/-/detail/=/actress_id=(.*)/")
+        self.get_new_actress("http://www.dmm.co.jp/mono/dvd/-/actress/", "act-box-100 group mg-b20", 0, "/mono/dvd/-/list/=/article=actress/id=(.*)/")
+
+        with codecs.open(self.actress_json, 'w', 'utf-8') as f:
+            json.dump(self.dict_actress, f, ensure_ascii=False)
+
+    def get_new_actress(self, url, cssClass, index, hrefPattern):
         r = requests.get(url)
         soup = bs(r.text)
 
-        act_box = soup.find_all("ul", {"class": "act-box-125 group"})
-        actresses = act_box[1].find_all("a")
+        act_box = soup.find_all("ul", {"class": cssClass})
+        actresses = act_box[index].find_all("a")
         for actress in actresses:
-            pattern = re.compile("/-/detail/=/actress_id=(.*)/")
+            pattern = re.compile(hrefPattern)
             match = pattern.search(actress.get("href"))
             actress_id = match.group(1)
             
             if actress_id not in self.dict_actress:
-                actress_img = actress.find("img").get("src")
+                actress_img = actress.find("img").get("src").replace('medium/', '')
                 actress_name = actress.text.encode('utf-8')
 
                 directory = self.root_training_today + actress_id
@@ -78,9 +84,6 @@ class ETL:
                 self.dict_actress[actress_id] = {"name": unicode(actress_name, 'utf-8'), "img": actress_img}
                 print actress_name
                 print actress_img
-
-        with codecs.open(self.actress_json, 'w', 'utf-8') as f:
-            json.dump(self.dict_actress, f, ensure_ascii=False)
 
     def check_new_works(self):
         now = datetime.datetime.now()
