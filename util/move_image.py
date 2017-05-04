@@ -26,9 +26,10 @@ def main(args):
         for file in files:
             file_from = os.path.join(dir_from, file)
             file_to = os.path.join(dir_to, file)
-            shutil.move(file_from, file_to)
-            print file_from
-            print file_to
+            if not os.path.isfile(file_to):
+                shutil.move(file_from, file_to)
+                print file_from
+                print file_to
 
 if __name__ == '__main__':
     if os.path.exists(root_training_images_today):
