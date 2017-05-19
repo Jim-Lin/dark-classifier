@@ -16,13 +16,13 @@ this is a face classifier which implements by aligned face with openface and ret
 * ...
 
 ### Step 2: face detection and alignment
+mount face folder and run docker openface container to create a cropped and aligned version of each training-images by face landmarks
+
 ```
 docker run -v /face:/face --rm bamos/openface \
 /root/openface/util/align-dlib.py /face/training-images \
 align outerEyesAndNose /face/aligned-images/ --size 96
 ```
-
-to create a cropped and aligned version of each training-images by face landmarks
 
 ### Step 3: check every face image count and convert png to jpeg
 * [WARNING: Folder has less than 20 images, which may cause issues.](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/examples/image_retraining/retrain.py#L157)
@@ -37,9 +37,11 @@ python /face/util/png_to_jpeg.py \
 ### Step 1: run scheduler
 `python /job/scheduler.py`
 
-use [multiprocessing](https://github.com/Jim-Lin/dark-classifier/blob/master/job/etl.py#L164) to fetch in efficiency
+apply [multiprocessing](https://github.com/Jim-Lin/dark-classifier/blob/master/job/etl.py#L164) to fetch in efficiency
 
 ### Step 2: daily face detection and alignment
+mount face folder and run docker openface container
+
 ```
 docker run -v /face:/face --rm bamos/openface \
 /root/openface/util/align-dlib.py /face/$(date +\%Y-\%m-\%d)-training-images \
@@ -54,6 +56,8 @@ align outerEyesAndNose /face/$(date +\%Y-\%m-\%d)-aligned-images/ --size 96
 ## how to retrain model
 * [How to Retrain Inception's Final Layer for New Categories](https://www.tensorflow.org/tutorials/image_retraining)
 
+mount face folder and run docker tensorflow container and you will get the retrain model (**output_graph.pb** and **output_labels.txt**) to able to do DARK Facial Recognition
+
 ```
 docker run -v /face:/face --rm gcr.io/tensorflow/tensorflow:latest-devel \
 python /tensorflow/tensorflow/examples/image_retraining/retrain.py \
@@ -64,8 +68,6 @@ python /tensorflow/tensorflow/examples/image_retraining/retrain.py \
 --model_dir /face/inception \
 --bottleneck_dir /face/bottleneck
 ```
-
-you will get the retrain model (output_graph.pb and output_labels.txt) to able to do DARK Facial Recognition
 
 ## how to classify
 * [use the retrained model in a Python program](https://github.com/eldor4do/TensorFlow-Examples/blob/master/retraining-example.py)
