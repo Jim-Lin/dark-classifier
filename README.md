@@ -8,6 +8,13 @@ this is a face classifier which implements by aligned face with openface and ret
 * bamos/openface
 * gcr.io/tensorflow/tensorflow:latest-devel
 
+## Flow
+1. collect face data
+    1. [one time](#how-to-collect-face-data-one-time)
+    1. [daily cron job](#how-to-collect-face-data-daily-cron-job)
+1. [retrain model](#how-to-retrain-model)
+1. [classify](#how-to-classify)
+
 ## how to collect face data (one time)
 ### Step 1: make a training subfolder for each person
 * /face/training-images/\<xxx\>/...
@@ -28,7 +35,7 @@ align outerEyesAndNose /face/aligned-images/ --size 96
 * [WARNING: Folder has less than 20 images, which may cause issues.](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/examples/image_retraining/retrain.py#L157)
 
 ```
-python /face/util/png_to_jpeg.py \
+python /util/png_to_jpeg.py \
 --dir_from /face/aligned-images \
 --dir_to /face/aligned-images-jpeg
 ```
