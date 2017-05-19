@@ -1,4 +1,5 @@
 # dark-classifier
+this is a face classifier which implement by aligned face with openface and retrain model with tensorflow. finally, you can use model to classify face.
 
 ## Structure
 ![structure](structure.png?raw=true)
@@ -56,7 +57,7 @@ align outerEyesAndNose /face/$(date +\%Y-\%m-\%d)-aligned-images/ --size 96
 ```
 docker run -v /face:/face --rm gcr.io/tensorflow/tensorflow:latest-devel \
 python /tensorflow/tensorflow/examples/image_retraining/retrain.py \
---image_dir /face/<aligned-images-jpeg or training-images> \
+--image_dir /face/aligned-images-jpeg \
 --output_graph /face/output_graph.pb \
 --output_labels /face/output_labels.txt \
 --how_many_training_steps 2000 \
@@ -77,5 +78,5 @@ python label_image.py \
 ```
 
 ## future work
-* to improve classify accuracy, need prepare a huge dataset
-* to build classify api server 
+* to improve classifier accuracy, need prepare a huge dataset
+* to build classifier api server 
