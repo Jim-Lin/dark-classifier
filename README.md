@@ -72,12 +72,16 @@ python /tensorflow/tensorflow/examples/image_retraining/retrain.py \
 ## how to classify
 * [use the retrained model in a Python program](https://github.com/eldor4do/TensorFlow-Examples/blob/master/retraining-example.py)
 
+pass image file path with retrain model and then get the top 3 labels and scores
+
 ```
-python label_image.py \
+python /tensorflow/label_image.py \
 --image <face>.jpg \
 --model /face/output_graph.pb \
 --labels /face/output_labels.txt
 ```
+
+![sample_result](sample_result.png?raw=true)
 
 ## future work
 * to improve classifier accuracy, need prepare a huge dataset
