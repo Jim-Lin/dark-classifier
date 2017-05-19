@@ -1,5 +1,5 @@
 # dark-classifier
-this is a face classifier which implement by aligned face with openface and retrain model with tensorflow. finally, you can use model to classify face.
+this is a face classifier which implements by aligned face with openface and retrain model with tensorflow. finally, you can use the model to classify face.
 
 ## Structure
 ![structure](structure.png?raw=true)
