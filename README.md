@@ -46,9 +46,9 @@ align outerEyesAndNose /face/$(date +\%Y-\%m-\%d)-aligned-images/ --size 96
 ```
 
 ### Step 3: move daily face data to training subfolder
-`python /home/shuai/util/move_image.py`
+`python /util/move_image.py`
 
-### [Step 4: check every face image count and convert png to jpeg](#Step-3:-check-every-face-image-count-and-convert-png-to-jpeg)
+### [Step 4: check every face image count and convert png to jpeg](#step-3-check-every-face-image-count-and-convert-png-to-jpeg)
 
 ## how to retrain model
 * [How to Retrain Inception's Final Layer for New Categories](https://www.tensorflow.org/tutorials/image_retraining)
@@ -77,4 +77,5 @@ python label_image.py \
 ```
 
 ## future work
-to improve classify accuracy, need prepare a huge dataset
+* to improve classify accuracy, need prepare a huge dataset
+* to build classify api server 
