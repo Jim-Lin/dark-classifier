@@ -92,7 +92,7 @@ python tensorflow/label_image.py \
 --labels /face/output_labels.txt
 ```
 
-![sample_result](sample_result.png?raw=true){width=50% height=50%}
+<img src="sample_result.png" width="50%" height="50%">
 
 ## future work
 * to improve classifier accuracy, need prepare a huge dataset
