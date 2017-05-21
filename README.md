@@ -80,6 +80,10 @@ python /tensorflow/tensorflow/examples/image_retraining/retrain.py \
 --bottleneck_dir /face/bottleneck
 ```
 
+### sample model
+* output_graph.pb: https://storage.googleapis.com/dark-face/output_graph.pb
+* output_labels.txt: https://storage.googleapis.com/dark-face/output_labels.txt
+
 ## how to classify
 * [use the retrained model in a Python program](https://github.com/eldor4do/TensorFlow-Examples/blob/master/retraining-example.py)
 
