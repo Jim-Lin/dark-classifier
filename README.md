@@ -94,11 +94,10 @@ python /tensorflow/tensorflow/examples/image_retraining/retrain.py \
 
 ---
 
-[install TensorFlow](https://www.tensorflow.org/install/)
-
-on linux
+install [TensorFlow](https://www.tensorflow.org/install/) on your platform
 
 ```bash
+# on linux
 $ pip install --upgrade \
 https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.1.0-cp34-cp34m-linux_x86_64.whl
 ```
