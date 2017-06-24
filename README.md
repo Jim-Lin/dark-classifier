@@ -74,7 +74,7 @@ $ python util/move_image.py
 mount face folder and run docker tensorflow container and you will get the retrain model (**output_graph.pb** and **output_labels.txt**) to able to do DARK Facial Recognition
 
 ```bash
-$ docker run -v /face:/face --rm gcr.io/tensorflow/tensorflow:latest-devel \
+$ docker run -v /face:/face --privileged --rm gcr.io/tensorflow/tensorflow:latest-devel \
 python /tensorflow/tensorflow/examples/image_retraining/retrain.py \
 --image_dir /face/aligned-images-jpeg \
 --output_graph /face/output_graph.pb \
@@ -115,4 +115,4 @@ $ python tensorflow/label_image.py \
 
 ## future work
 * to improve classifier accuracy, need prepare a huge dataset
-* to build classifier api server 
+* to build classifier api server
