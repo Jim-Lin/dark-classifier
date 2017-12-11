@@ -9,6 +9,10 @@ from functools import partial
 
 def convert(dir_from_sub, dir_to_sub, file):
     file_from = os.path.join(dir_from_sub, file)
+    file_from_size = os.path.getsize(file_from)
+    if file_from_size == 0:
+        return
+
     filename = os.path.splitext(file)[0]
     file_to = os.path.join(dir_to_sub, filename + ".jpg")
     if not os.path.exists(file_to):
@@ -26,7 +30,7 @@ def main(args):
     for actress_id in ids:
         dir_from_sub = os.path.join(dir_from, actress_id)
         files = [f for f in os.listdir(dir_from_sub) if not f.startswith('.')]
-        if len(files) >= 20:
+        if len(files) >= 40:
             dir_to_sub = os.path.join(dir_to, actress_id)
             if not os.path.exists(dir_to_sub):
                 os.makedirs(dir_to_sub)
