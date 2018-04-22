@@ -48,7 +48,7 @@ $ python util/png_to_jpeg.py \
 $ python job/scheduler.py
 ```
 
-apply [multiprocessing](https://github.com/Jim-Lin/dark-classifier/blob/master/job/etl.py#L164) to fetch in efficiency
+apply [multiprocessing](https://github.com/Jim-Lin/dark-classifier/blob/master/job/etl.py) to fetch in efficiency
 
 ### Step 2: daily face detection and alignment
 mount face folder and run docker openface container
